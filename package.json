@@ -1,0 +1,16 @@
+{
+  "name": "erc20-opt-in-migration",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Facu Spagnuolo <facundo@zeppelin.solutions>",
+  "license": "MIT",
+  "scripts": {
+    "test": "NODE_ENV=test npx truffle test"
+  },
+  "dependencies": {
+    "openzeppelin-solidity": "^1.10.0",
+    "openzeppelin-zos": "^1.9.1",
+    "truffle": "^4.1.6",
+    "zos-lib": "^1.1.0"
+  }
+}
