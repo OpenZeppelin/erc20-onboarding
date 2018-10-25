@@ -12,7 +12,7 @@ import "openzeppelin-eth/contracts/token/ERC20/ERC20Detailed.sol";
  * @dev This contract is an upgradeable ERC20 token example to show how a regular token could be migrated using
  * ZeppelinOS and the ERC20Migrator contract provided by the EVM package openzeppelin-eth.
  */
-contract MyUpgradeableToken is Initializable, ERC20, ERC20Detailed, ERC20Mintable {
+contract MyUpgradeableToken is Initializable, ERC20Detailed, ERC20Mintable {
 
   /**
    * @dev Initialization function.

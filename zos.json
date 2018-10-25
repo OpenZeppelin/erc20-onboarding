@@ -1,0 +1,12 @@
+{
+  "zosversion": "2",
+  "name": "erc20-onboarding",
+  "version": "1.0.0",
+  "contracts": {
+    "ERC20Migrator": "ERC20Migrator",
+    "MyUpgradeableToken": "MyUpgradeableToken"
+  },
+  "dependencies": {
+    "openzeppelin-eth": "^2.0.0"
+  }
+}

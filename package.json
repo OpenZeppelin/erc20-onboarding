@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "openzeppelin-eth": "^2.0.2",
-    "openzeppelin-solidity": "^2.0.0",
     "zos": "^2.0.0",
     "zos-lib": "^2.0.0"
   }
