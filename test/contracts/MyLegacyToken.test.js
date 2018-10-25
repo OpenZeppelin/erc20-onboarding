@@ -1,18 +1,16 @@
 const { Contracts } = require('zos-lib')
-const shouldBehaveLikeDetailedERC20 = require('./behaviors/DetailedERC20.behavior')
-const shouldBehaveLikeStandardToken = require('./behaviors/StandardToken.behavior')
+const shouldBehaveLikeERC20Detailed = require('./behaviors/ERC20Detailed.behavior')
+const shouldBehaveLikeERC20 = require('./behaviors/ERC20.behavior')
 
 const MyLegacyToken = Contracts.getFromLocal('MyLegacyToken')
 
 contract('MyLegacyToken', function ([_, owner, recipient, anotherAccount]) {
-  const name = 'MyToken'
-  const symbol = 'MTK'
-  const decimals = 18
+  const initialSupply = new web3.BigNumber('10000e18')
 
   beforeEach('deploying token', async function () {
-    this.token = await MyLegacyToken.new(name, symbol, decimals, { from: owner })
+    this.token = await MyLegacyToken.new({ from: owner })
   })
 
-  shouldBehaveLikeDetailedERC20(name, symbol, decimals)
-  shouldBehaveLikeStandardToken([owner, recipient, anotherAccount])
+  shouldBehaveLikeERC20([owner, recipient, anotherAccount], initialSupply)
+  shouldBehaveLikeERC20Detailed('My Legacy Token', 'MLT', 18, initialSupply)
 })

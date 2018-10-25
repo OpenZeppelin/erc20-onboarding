@@ -1,35 +1,27 @@
-pragma solidity ^0.4.21;
+pragma solidity ^0.4.24;
 
-import "./openzeppelin-zos/MigratableERC20.sol";
-import "openzeppelin-zos/contracts/token/ERC20/DetailedERC20.sol";
-import "openzeppelin-zos/contracts/token/ERC20/StandardToken.sol";
+import "zos-lib/contracts/Initializable.sol";
+import "openzeppelin-eth/contracts/token/ERC20/ERC20.sol";
+import "openzeppelin-eth/contracts/token/ERC20/IERC20.sol";
+import "openzeppelin-eth/contracts/drafts/ERC20Migrator.sol";
+import "openzeppelin-eth/contracts/token/ERC20/ERC20Mintable.sol";
+import "openzeppelin-eth/contracts/token/ERC20/ERC20Detailed.sol";
 
 /**
  * @title MyUpgradeableToken
- * @dev This contract is a mock to test how a token could be migrated using the MigratableERC20 contract
+ * @dev This contract is an upgradeable ERC20 token example to show how a regular token could be migrated using
+ * ZeppelinOS and the ERC20Migrator contract provided by the EVM package openzeppelin-eth.
  */
-contract MyUpgradeableToken is MigratableERC20, StandardToken, DetailedERC20 {
+contract MyUpgradeableToken is Initializable, ERC20, ERC20Detailed, ERC20Mintable {
 
   /**
-   * @dev Initialization function. This function all the metadata required by the token contract.
-   * @dev This function will call the MigratableERC20 and DetailedERC20 initializers.
+   * @dev Initialization function.
+   * @dev This function will initialize the new upgradeable ERC20 contract and will set up the ERC20 migrator.
    */
-  function initialize(ERC20 _legacyToken, string _name, string _symbol, uint8 _decimals)
-  isInitializer("MyUpgradeableToken", "1.0.0")
-  public
-  {
-    MigratableERC20.initialize(_legacyToken);
-    DetailedERC20.initialize(_name, _symbol, _decimals);
+  function initialize(ERC20Detailed _legacyToken, ERC20Migrator _migrator) initializer public {
+    ERC20Mintable.initialize(_migrator);
+    ERC20Detailed.initialize(_legacyToken.name(), _legacyToken.symbol(), _legacyToken.decimals());
+    _migrator.beginMigration(this);
   }
 
-  /**
-   * @dev Internal minting function
-   * This function will be removed in favour of our new upcoming version of StandardToken
-   */
-  function _mint(address _to, uint256 _amount) internal {
-    require(_to != address(0));
-    totalSupply_ = totalSupply_.add(_amount);
-    balances[_to] = balances[_to].add(_amount);
-    emit Transfer(address(0), _to, _amount);
-  }
 }
