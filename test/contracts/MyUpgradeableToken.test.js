@@ -21,6 +21,8 @@ contract('MyUpgradeableToken', function ([_, owner, recipient, anotherAccount]) 
     this.upgradeableToken = await MyUpgradeableToken.new()
     const upgradeableTokenData = encodeCall('initialize', ['address', 'address'], [this.legacyToken.address, this.migrator.address])
     await this.upgradeableToken.sendTransaction({ data: upgradeableTokenData })
+
+    await this.migrator.beginMigration(this.upgradeableToken.address);
   })
 
   describe('ERC20 token behavior', function () {

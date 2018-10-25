@@ -21,7 +21,6 @@ contract MyUpgradeableToken is Initializable, ERC20Detailed, ERC20Mintable {
   function initialize(ERC20Detailed _legacyToken, ERC20Migrator _migrator) initializer public {
     ERC20Mintable.initialize(_migrator);
     ERC20Detailed.initialize(_legacyToken.name(), _legacyToken.symbol(), _legacyToken.decimals());
-    _migrator.beginMigration(this);
   }
 
 }
