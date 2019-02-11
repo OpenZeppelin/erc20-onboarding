@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "openzeppelin-eth": "^2.0.2",
-    "zos": "^2.0.0",
-    "zos-lib": "^2.0.0"
+    "truffle": "^4.1.15",
+    "zos": "^2.1.2",
+    "zos-lib": "^2.1.2"
   }
 }
