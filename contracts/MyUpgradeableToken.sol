@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.0;
 
 import "zos-lib/contracts/Initializable.sol";
 import "openzeppelin-eth/contracts/token/ERC20/ERC20.sol";
@@ -19,7 +19,7 @@ contract MyUpgradeableToken is Initializable, ERC20Detailed, ERC20Mintable {
    * @dev This function will initialize the new upgradeable ERC20 contract and will set up the ERC20 migrator.
    */
   function initialize(ERC20Detailed _legacyToken, ERC20Migrator _migrator) initializer public {
-    ERC20Mintable.initialize(_migrator);
+    ERC20Mintable.initialize(address(_migrator));
     ERC20Detailed.initialize(_legacyToken.name(), _legacyToken.symbol(), _legacyToken.decimals());
   }
 

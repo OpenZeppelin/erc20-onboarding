@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.0;
 
 
 import "openzeppelin-eth/contracts/math/SafeMath.sol";
@@ -14,7 +14,7 @@ contract ERC20Standard is IERC20 {
   mapping (address => uint256) private _balances;
   mapping (address => mapping (address => uint256)) private _allowed;
 
-  constructor(string name, string symbol, uint8 decimals) public {
+  constructor(string memory name, string memory symbol, uint8 decimals) public {
     _name = name;
     _symbol = symbol;
     _decimals = decimals;
@@ -23,14 +23,14 @@ contract ERC20Standard is IERC20 {
   /**
    * @return the name of the token.
    */
-  function name() public view returns(string) {
+  function name() public view returns(string memory) {
     return _name;
   }
 
   /**
    * @return the symbol of the token.
    */
-  function symbol() public view returns(string) {
+  function symbol() public view returns(string memory) {
     return _symbol;
   }
 
@@ -193,7 +193,7 @@ contract ERC20Standard is IERC20 {
    * @param value The amount that will be created.
    */
   function _mint(address account, uint256 value) internal {
-    require(account != 0);
+    require(account != address(0));
     _totalSupply = _totalSupply.add(value);
     _balances[account] = _balances[account].add(value);
     emit Transfer(address(0), account, value);
@@ -206,7 +206,7 @@ contract ERC20Standard is IERC20 {
    * @param value The amount that will be burnt.
    */
   function _burn(address account, uint256 value) internal {
-    require(account != 0);
+    require(account != address(0));
     require(value <= _balances[account]);
 
     _totalSupply = _totalSupply.sub(value);
