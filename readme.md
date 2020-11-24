@@ -1,3 +1,7 @@
+> :warning: OpenZeppelin SDK is no longer being developed.
+>
+> For smart contract upgrades we recommend using [OpenZeppelin Upgrades Plugins](https://docs.openzeppelin.com/upgrades-plugins/).
+
 # ERC20 opt-in onboarding
 
 **This code uses an old version of the OpenZeppelin SDK, named ZeppelinOS. Nonetheless, the instructions in the documentation still apply.**
